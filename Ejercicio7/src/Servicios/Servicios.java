@@ -3,20 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejercicio7;
+package Servicios;
 
 import Entidad.Persona;
-import Servicios.Servicios;
+import java.util.Scanner;
 
 /**
- *
- * @author Usuario
- */
-public class Ejercicio7 {
-
-    /**
-     * 
-        * Realizar una clase llamada Persona que tenga los siguientes atributos: nombre, edad,
+ *Realizar una clase llamada Persona que tenga los siguientes atributos: nombre, edad,
         sexo ('H' hombre, 'M' mujer, 'O' otro), peso y altura. Si el alumno desea añadir algún otro
         atributo, puede hacerlo. Los métodos que se implementarán son:
          Un constructor por defecto.
@@ -26,6 +19,7 @@ public class Ejercicio7 {
         al usuario y después se le asignan a sus respectivos atributos para llenar el objeto
         Persona. Además, comprueba que el sexo introducido sea correcto, es decir, H, M o
         O. Si no es correcto se deberá mostrar un mensaje
+        * 
          Método calcularIMC(): calculara si la persona está en su peso ideal (peso en
         kg/(altura^2 en mt2)). Si esta fórmula da por resultado un valor menor que 20,
         significa que la persona está por debajo de su peso ideal y la función devuelve un -1.
@@ -33,6 +27,9 @@ public class Ejercicio7 {
         persona está en su peso ideal y la función devuelve un 0. Finalmente, si el resultado
         de la fórmula es un valor mayor que 25 significa que la persona tiene sobrepeso, y la
         función devuelve un 1.
+        * 
+        * 
+        * 
          Método esMayorDeEdad(): indica si la persona es mayor de edad. La función
         devuelve un booleano.
         * 
@@ -46,55 +43,72 @@ public class Ejercicio7 {
 
         cuantas están por debajo de su peso, cuantas en su peso ideal y cuantos, por encima, y
         también calcularemos un porcentaje de cuantos son mayores de edad y cuantos menores
-     * @param args the command line arguments
-     */
-    @SuppressWarnings("empty-statement")
-    public static void main(String[] args) {
-        // TODO code application logic here
+ * @author Usuario
+ */
+public class Servicios {
+    
+    Scanner leer = new Scanner(System.in);
+    Persona humano = new Persona();
+    
+    
+    public Persona crearPersona(){
+        System.out.println("Ingrese el nombre");
+        humano.setNombre(leer.next());
         
-        Servicios persona1 = new Servicios();
-        Persona personaA = persona1.crearPersona();
+        System.out.println("Ingrese la altura");
+        humano.setAltura(leer.nextDouble());
         
-        double IMC1 = persona1.calcularIMC();
-        boolean edad1 = persona1.esMayorDeEdad();
+        System.out.println("Ingrese la edad");
+        humano.setEdad(leer.nextInt());
         
+        System.out.println("Ingrese el peso");
+        humano.setPeso(leer.nextDouble());
         
-        Servicios persona2 = new Servicios();
-        Persona personaB = persona2.crearPersona();
+        /*
+        String sexo = leer.next();
         
-        double IMC2 = persona2.calcularIMC();
-        boolean edad2 = persona2.esMayorDeEdad();
-        
-        Servicios persona3 = new Servicios();
-        Persona personaC = persona3.crearPersona();
-        
-        double IMC3 = persona3.calcularIMC();
-        boolean edad3 = persona3.esMayorDeEdad();
-        
-        Servicios persona4 = new Servicios();
-        Persona personaD = persona4.crearPersona();
-        
-        double IMC4 = persona4.calcularIMC();
-        boolean edad4 = persona4.esMayorDeEdad();
-        
-        double promedio = (IMC1 + IMC2 + IMC3 + IMC4)/4;
-        System.out.println("el promedio IMC es de: " + promedio);
-        
-        int contador = 0;
-        if(edad1){contador++;
-        if(edad2){contador++;
-        if(edad3){contador++;
-        if(edad4){contador++;
+        while(!"h".equals(sexo) || !"m".equals(sexo) || !"o".equals(sexo)){
+            System.out.println("Ingrese el sexo");
+            sexo = leer.next();
         }
+        humano.setSexo(sexo);
+        */
+        System.out.println("Ingrese el sexo");
+        humano.setSexo(leer.next());
+        
+        
+        return humano;
+    }
+    
+    public double calcularIMC(){
+        
+        double IMC = (humano.getPeso()/((humano.getAltura() * humano.getAltura())));
+        
+        if(IMC < 20){
+            System.out.println("-1");
+            return IMC;
+        } else if (IMC >= 20 && IMC <= 25){
+            System.out.println("0");
+            return IMC;
+        } else{
+            System.out.println("1");
+            return IMC;
+        }    
+        
+    }
+    
+    public boolean esMayorDeEdad(){
+        
+        if(humano.getEdad() >= 18){
+            System.out.println("Mayor de edad");
+            return true;
+        } else {
+            System.out.println("Menor de edad");
+            return false;
         }
-        
-            System.out.println("Mayores de edad: " + contador + ", menores de edad: " + (4 - contador) );
-        
-        
         
         
     }
     
-}
-}
+    
 }
